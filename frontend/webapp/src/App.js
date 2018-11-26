@@ -1,43 +1,21 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { connect } from "react-redux";
-import { testOne } from "./store/actions/test";
+import Layout from "./containers/Layout";
+import { BrowserRouter as Router } from "react-router-dom";
+import BaseRouter from "./routes";
+import "./style.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.changeTest = this.changeTest.bind(this);
-  }
-
-  changeTest(e) {
-    console.log(e.target.value);
-    this.props.testOne(e.target.value);
-  }
-
   render() {
     return (
-      <div className="App">
-        <input type="text" onChange={this.changeTest} />
+      <div>
+        <Router>
+          <Layout>
+            <BaseRouter />
+          </Layout>
+        </Router>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    test: state.test
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    testOne: test => dispatch(testOne(test))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;
