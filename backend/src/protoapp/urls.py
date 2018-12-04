@@ -1,12 +1,10 @@
-from django.conf.urls import url, include
-from rest_framwork import routers
+from django.urls import path
+from rest_framework import routers
 from protoapp import views
 
-router = routers.DefaultRouter()
-router.register(r'try', views.index)
+#router = routers.DefaultRouter()
+#router.register(r'users', views.PostsComments)
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    path('users/', views.PostsComments, name = "users-all"),
 ]
