@@ -6,5 +6,5 @@ from protoapp import views
 #router.register(r'users', views.PostsComments)
 
 urlpatterns = [
-    path('posts/', views.PostsComments, name = "users-all"),
+    path('posts', views.PostsManagement.as_view({'get':'list'}), name = "users-all"),
 ]
