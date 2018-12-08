@@ -2,9 +2,8 @@ from django.urls import path
 from rest_framework import routers
 from protoapp import views
 
-#router = routers.DefaultRouter()
-#router.register(r'users', views.PostsComments)
+router = routers.DefaultRouter()
+router.register(r'posts', views.PostsManagement, basename='posts')
 
-urlpatterns = [
-    path('posts', views.PostsManagement.as_view({'get':'list'}), name = "users-all"),
-]
+
+urlpatterns = router.urls
