@@ -1,21 +1,13 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import Post from "../components/Post";
-import Form from "../components/Form";
 import Comment from "../components/Comment";
+import axios from "axios";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import CommentForm from "../components/CommentForm";
 
 export default class PostDetail extends Component {
   state = {
-    post: {
-      id: 1,
-      title: "Post 1",
-      date: "10/12/2014",
-      content: "lorem ipsum dorem colem rolem melom stom inventandom",
-      likes: 25,
-      comments: 4
-    },
     comments: [
       {
         id: 1,
@@ -41,16 +33,39 @@ export default class PostDetail extends Component {
         content:
           "Commento Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor accusamus animi dolore veniam pariatur fuga odio deserunt quidem adipisci eum nisi aliquam voluptatem iste, harum eos maxime repellat hic sapiente."
       }
-    ]
+    ],
+    isLoading: true
   };
+
+  componentDidMount() {
+    const postID = this.props.match.params.postID;
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts/${postID}`)
+      .then(res => {
+        this.setState({
+          post: res.data,
+          isLoading: false
+        });
+      });
+  }
 
   render() {
     return (
       <div>
-        <Post {...this.state.post} />
-        {this.state.comments.map(comment => (
-          <Comment key={comment.id} {...comment} />
-        ))}
+        {this.state.isLoading ? (
+          <h4 style={{ display: "block", textAlign: "center" }}>Loading...</h4>
+        ) : (
+          <div>
+            <Post {...this.state.post} />
+            <CommentForm />
+            {this.state.comments.map(comment => (
+              <div key={comment.id}>
+                <Divider />
+                <Comment {...comment} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   }

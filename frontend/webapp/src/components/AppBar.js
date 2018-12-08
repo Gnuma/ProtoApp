@@ -28,7 +28,7 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/">
+          <Link to="/" style={{ color: "white" }}>
             <IconButton
               className={classes.menuButton}
               color="inherit"
@@ -40,11 +40,15 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             ProtoApp
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit">Login</Button>
+          </Link>
           <Typography color="inherit" style={{ margin: "0 10px" }}>
             or
           </Typography>
-          <Button color="inherit">Signup</Button>
+          <Link to="/signup" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit">Signup</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

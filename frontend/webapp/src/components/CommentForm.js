@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-export default class Form extends Component {
+export default class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
@@ -12,7 +12,6 @@ export default class Form extends Component {
           spacing={24}
           direction="column"
           alignItems="center"
-          justify="center"
           style={{ marginBottom: "20px" }}
         >
           <Grid item>
@@ -30,7 +29,7 @@ export default class Form extends Component {
           </Grid>
           <Grid item>
             <Button variant="contained" color="primary" type="submit">
-              Create Post
+              Add Comment
             </Button>
           </Grid>
         </Grid>
