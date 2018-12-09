@@ -23,7 +23,7 @@ class PostsManagement(viewsets.ModelViewSet):
         #Creates a post
         if request.method == 'POST':
             #The view accept the request
-            dbData = JSONParser.parse(request)
+            dbData = JSONParser.parse(stream=request)
             serializer = self.serializer_class(data = dbData)
             if serializer.is_valid():
                 serializer.save()
