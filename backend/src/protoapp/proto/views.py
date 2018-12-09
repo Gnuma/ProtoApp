@@ -33,4 +33,12 @@ class PostsManagement(viewsets.ModelViewSet):
         else:
             #The view refuses the request
             return Response({'status':'Richiesta non valida'}, status = status.HTTP_400_BAD_REQUEST)
+    '''
+    Destroys one record from the db according to id passed through the url
+    '''
+    def destroy(self, request, pk,format = None):
+        post = Posts.objects.get(pk = pk)
+        post.delete()
+
+
     
