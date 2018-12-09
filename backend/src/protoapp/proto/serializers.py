@@ -6,4 +6,4 @@ class PostsSerializer(serializers.ModelSerializer):
     comments = serializers.SlugRelatedField(queryset = Comments.objects.all(), many = True, read_only = False, slug_field = 'content')
     class Meta:
         model = Posts
-        fields = ('content', 'pub_date', 'user', 'comments')
+        fields = ('id','content', 'pub_date', 'user', 'comments')
