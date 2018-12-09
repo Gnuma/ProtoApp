@@ -17,12 +17,18 @@ export default class PostList extends Component {
   };
 
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
-      this.setState({
+    axios
+      .get(`http://127.0.0.1:8000/proto/posts/`)
+      .then(res => {
+        this.setState({
         posts: res.data.reverse(),
         isLoading: false
       });
-    });
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   createPost(e) {

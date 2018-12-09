@@ -18,17 +18,17 @@ export default function Post(props) {
     >
       <Grid item>
         <Typography gutterBottom variant="h5">
-          {props.title}
+          {props.user}
         </Typography>
       </Grid>
       <Grid item>
         <Typography gutterBottom variant="subtitle2">
-          {props.date}
+          {props.pub_date}
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography gutterBottom variant="body1">
-          {props.body}
+          {props.content}
         </Typography>
       </Grid>
       <Grid
@@ -41,12 +41,12 @@ export default function Post(props) {
         spacing={24}
       >
         <Grid item>
-          <Badge color="secondary" badgeContent={props.likes}>
+          <Badge color="secondary" badgeContent={props.nlikes}>
             <LikeIcon />
           </Badge>
         </Grid>
         <Grid item>
-          <Badge color="secondary" badgeContent={props.comments}>
+          <Badge color="secondary" badgeContent={props.ncomments}>
             <CommentIcon />
           </Badge>
         </Grid>
