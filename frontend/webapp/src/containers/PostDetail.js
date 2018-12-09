@@ -39,14 +39,13 @@ export default class PostDetail extends Component {
 
   componentDidMount() {
     const postID = this.props.match.params.postID;
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${postID}`)
-      .then(res => {
-        this.setState({
-          post: res.data,
-          isLoading: false
-        });
+    axios.get(`http://127.0.0.1:8000/proto/posts/${postID}`).then(res => {
+      this.setState({
+        post: res.data,
+        isLoading: false
       });
+      console.log(res.data);
+    });
   }
 
   render() {

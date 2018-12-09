@@ -21,9 +21,9 @@ export default class PostList extends Component {
       .get(`http://127.0.0.1:8000/proto/posts/`)
       .then(res => {
         this.setState({
-        posts: res.data.reverse(),
-        isLoading: false
-      });
+          posts: res.data.reverse(),
+          isLoading: false
+        });
         console.log(res);
       })
       .catch(err => {
@@ -33,12 +33,20 @@ export default class PostList extends Component {
 
   createPost(e) {
     e.preventDefault();
-    const body = e.target.body.value;
-    const title = e.target.title.value;
+    const content = e.target.body.value;
+    const user = e.target.title.value;
 
-    this.setState({
-      posts: [{ body, title, id: 101 }, ...this.state.posts]
-    });
+    /*this.setState({
+      posts: [{ content, user, id: 101 }, ...this.state.posts]
+    });*/
+
+    axios
+      .post(`http://127.0.0.1:8000/proto/posts/`, { content, user: 1 })
+      .then(res => {
+        console.log("aggiunto");
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
