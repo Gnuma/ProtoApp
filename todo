@@ -1,0 +1,15 @@
+API ToDo
+ - Creazione Post -> POST /proto/posts/
+    params: { content, user }
+    return: post // se possibile altrimenti return {}
+
+ - Visualizzazione Commenti -> GET /proto/posts/:idPost/
+    params: {}
+    return: post cond id = :idPost
+
+ - Creazione Commenti -> POST /proto/posts/:idPost/comment/
+    params: { content, user }
+    return: comment // se possibile altrimenti return {}
+
+ - Login / Signup -> Da definire
+ - Change Like -> Da definire
