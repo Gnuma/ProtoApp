@@ -13,3 +13,26 @@ API ToDo
 
  - Login / Signup -> Da definire
  - Change Like -> Da definire
+
+Models
+ Post = {
+    id,
+    content,
+    pub_date,
+    comments*,
+    userId*,
+ }
+
+ Comment = {
+     id,
+     content,
+     pub_date,
+     idPost*,
+     userId*,
+ }
+
+ User = {
+     id,
+     name,
+     password,
+ }
