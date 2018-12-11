@@ -7,6 +7,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CommentForm from "../components/CommentForm";
 
 export default class PostDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.deletePost = this.deletePost.bind(this);
+  }
   state = {
     comments: [
       {
@@ -48,6 +52,18 @@ export default class PostDetail extends Component {
     });
   }
 
+  deletePost(e) {
+    e.preventDefault();
+    const postID = this.props.match.params.postID;
+    axios
+      .delete(`http://127.0.0.1:8000/proto/posts/${postID}`, { pk: postID })
+      .then(res => {
+        console.log("success");
+        this.props.history.push("/");
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div>
@@ -55,7 +71,7 @@ export default class PostDetail extends Component {
           <h4 style={{ display: "block", textAlign: "center" }}>Loading...</h4>
         ) : (
           <div>
-            <Post {...this.state.post} />
+            <Post {...this.state.post} deletePost={this.deletePost} />
             <CommentForm />
             {this.state.comments.map(comment => (
               <div key={comment.id}>

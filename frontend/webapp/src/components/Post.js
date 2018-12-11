@@ -6,6 +6,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Badge from "@material-ui/core/Badge";
+import Button from "@material-ui/core/Button";
+import dateFormatter from "../utils/dateFormatter";
 
 export default function Post(props) {
   let component = (
@@ -23,7 +25,7 @@ export default function Post(props) {
       </Grid>
       <Grid item>
         <Typography gutterBottom variant="subtitle2">
-          {props.pub_date}
+          {dateFormatter(props.pub_date)}
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -51,6 +53,15 @@ export default function Post(props) {
           </Badge>
         </Grid>
       </Grid>
+      {!props.listed ? (
+        <form onSubmit={props.deletePost}>
+          <Button variant="contained" color="secondary" type="submit">
+            Delete Post
+          </Button>
+        </form>
+      ) : (
+        ""
+      )}
     </Grid>
   );
 
