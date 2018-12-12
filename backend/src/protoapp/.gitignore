@@ -1,0 +1,5 @@
+protoapp/__pycache__/
+
+proto/__pycache__/
+
+proto/migrations/

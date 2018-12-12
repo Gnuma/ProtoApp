@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from .models import Comments, Posts, Users
-from .serializers import PostsSerializer
+from .serializers import PostsSerializer, CommentsSerializer
 
 
 class PostsManagement(viewsets.ModelViewSet):
@@ -13,11 +13,13 @@ class PostsManagement(viewsets.ModelViewSet):
     queryset = Posts.objects.all()
     serializer_class = PostsSerializer
     #parser_classes = (JSONParser,)
+    '''
     def list(self, request, format = None):
         #Returns all Posts instance
+        self.queryset = Posts.objects.all()
         serializer = self.serializer_class(self.queryset, many = True)
         return JsonResponse(serializer.data, safe = False)
-    
+    '''
     
     def create(self, request, format = None, pk = None):
         #Creates a post
@@ -34,24 +36,34 @@ class PostsManagement(viewsets.ModelViewSet):
     Destroys one record from the db according to id passed through the url
     '''
     def destroy(self, request, format = None):
-        post = Posts.objects.get(pk = pk)
+        post = Posts.objects.get(pk = self.kwargs['pk'])
         post.delete()
 
 
     """
     The following class contains every method needed to handle comments.
     """
-    class CommentsManagement(viewsets.ModelViewSet):
+class CommentsManagement(viewsets.ModelViewSet):
+     
+    queryset = Comments.objects.all()
+    serializer_class = Comments
 
-        """
-        Retrieve a single comment in according to the pk passed through the URL
-        """
-        def retrieve(self, request):
-            commentRetrieved = Comments.objects.get(pk = pk)
-            if commentRetrieved == False:
-                return JsonResponse({"status": "La risorsa richiesta non esiste"})
-            else:
-                return JsonResponse(commentRetrieved.__dict__)
+    """
+    Retrieve a single comment in according to the pk passed through the URL
+    
+    def retrieve(self, request):
+        commentRetrieved = Comments.objects.get(pk = self.kwargs['lookup'])
+        if commentRetrieved == False:
+            return JsonResponse({"status": "La risorsa richiesta non esiste"})
+        else:
+            return JsonResponse(commentRetrieved.__dict__)
+    """
+
+    def create(self, request):
+        key = int(request.data['user'])
+        post = int(request.data['post'])
+        newComment = Comments.objects.get(content = request.data['content'], user = Users.objects.get(pk = key), post = Posts.objects.get(pk = post))
+
 
         
 

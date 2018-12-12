@@ -7,3 +7,19 @@ class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
         fields = ('id','content', 'pub_date', 'user', 'comments')
+
+
+class  UsersSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Users
+        fields = ('id', 'username')
+
+
+class CommentsSerializer(serializers.ModelSerializer):
+    post = PostsSerializer(read_only = True)
+    user = UsersSerializer(read_only = True)
+    class Meta:
+        model = Comments
+        fields = ('id', 'content', 'pub_date', 'user', 'post')
+
